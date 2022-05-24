@@ -3,23 +3,27 @@ Ethereum Data Analysis on contracts, transactions, gas, scams and scammers using
 
 Ethereum is a blockchain-based distributed computing platform where users may exchange currency (Ether), provide or purchase services (smart contracts), mine their own coinage (tokens), as well as other applications. The Ethereum network is fully decentralized, managed by public-key cryptography, peer-to-peer networking, and proof-of-work to process/verify transactions.
 
-* [Total number of transactions](#result-a)
+* [Total number of transactions each month](#result-a1)
 
-* [Top 10 most popular services](#2-top-10-most-popular-services)
+* [Average Transaction values each month](#result-a2)
 
-* [Most lucrative forms of scam](https://github.com/Dorsa-Arezooji/Etherium-Analysis#31-most-lucritive-forms-of-scams)
+* [Top 10 Services for smart contracts](#result-b)
 
-* [How different scams changed with time](https://github.com/Dorsa-Arezooji/Etherium-Analysis#32-how-different-scams-changed-with-time)
+* [The top 10 most active miners](#result-c)
 
-* [Transactions gas price vs time](https://github.com/Dorsa-Arezooji/Etherium-Analysis#41-transactions-gas-price-vs-time)
+* [Most lucrative forms of scam](#result-d1)
 
-* [Contract gas vs time](https://github.com/Dorsa-Arezooji/Etherium-Analysis#42-contract-gas-vs-time)
+* [Correlation between Gas, Scam Type and Status](#result-d2)
 
-* [Contract complexity vs time](https://github.com/Dorsa-Arezooji/Etherium-Analysis#43-contract-complexity-vs-time)
+* [Transactions gas price vs time](#result-d-gas-guzzlers-1)
 
-* [Triangle count](https://github.com/Dorsa-Arezooji/Etherium-Analysis#51-triangle-count)
+* [Contract complexity vs time](#result-d-gas-guzzlers-2-and-3)
 
-* [Scammer wallets used for accumulating Ether](https://github.com/Dorsa-Arezooji/Etherium-Analysis#52-scammer-wallets)
+* [Map Reduce vs Spark Performance](#result-d-compare-tech)
+
+* [Identifying Wash Trades](#result-d-wash-trades)
+
+* [Identifying Forks in Ethereum Transactions](#result-d-ethereum-forks)
 
 
 ## **Dataset**
@@ -118,12 +122,12 @@ status: If the scam is currently active, inactive or has been taken offline
 Create a bar plot showing the number of transactions occurring every month between the start and end of the dataset. Create a bar plot showing the average value of transactions in each month between the start and end of the dataset. Note: As the dataset spans multiple years and you are aggregating together all transactions in the same month, make sure to include the year in your analysis.
 Note: Once the raw results have been processed within Hadoop/Spark you may create your bar plot in any software of your choice (excel, python, R, etc.)
 
-### _Result A_
+### _Result A1_
 **The total number of transactions are aggregated for each month included in the dataset.**
 
 <img width="595" alt="image" src="https://user-images.githubusercontent.com/35501313/170018630-13b12750-5a21-4ba2-a27a-64f4d9e0cb14.png">
 
-
+### _Result A2_
 **The average value of transactions in each month between the start and end of the dataset.**
 
 <img width="583" alt="image" src="https://user-images.githubusercontent.com/35501313/170018816-f7d626fa-affb-4485-b499-4865b46c6d32.png">
@@ -142,7 +146,7 @@ Secondly, in the reducer, if the address for a given aggregate from Job 1 was no
 _JOB 3 - TOP TEN_
 Finally, the third job will take as input the now filtered address aggregates and sort these via a top ten reducer, utilizing what you have learned from lab 4.
 
-### _Results:_
+### _Result B_
 the top 10 services with the highest amounts of Ethereum received for smart contracts are yielded.
 
 rank | address | total Ether received
@@ -162,7 +166,7 @@ rank | address | total Ether received
 ## **PART C. TOP TEN MOST ACTIVE MINERS (15%)**
 Evaluate the top 10 miners by the size of the blocks mined. This is simpler as it does not require a join. You will first have to aggregate blocks to see how much each miner has been involved in. You will want to aggregate size for addresses in the miner field. This will be similar to the wordcount that we saw in Lab 1 and Lab 2. You can add each value from the reducer to a list and then sort the list to obtain the most active miners.
 
-### _Results:_
+### _Result C_
 
 **The top 10 most active miners:**
 Rank | Miner | Total size
@@ -184,7 +188,7 @@ Rank | Miner | Total size
 ### _Popular Scams:_ 
 Utilising the provided scam dataset, what is the most lucrative form of scam? Does this correlate with certainly known scams going offline/inactive? For the correlation, you could produce the count of how many scams for each category are active/inactive/offline/online/etc and try to correlate it with volume (value) to make conclusions on whether state plays a factor in making some scams more lucrative. Therefore, getting the volume and state of each scam, you can make a conclusion whether the most lucrative ones are ones that are online or offline or active or inactive. So for that purpose, you need to just produce a table with SCAM TYPE, STATE, VOLUME which would be enough (15%).
 
-### _Results:_
+### _Result D1_
 
 _Part 1:_ **Scamming is the most lucrative type of scam**
 rank | most lucrative scam (category) | Total Gas Used | Total Ether profited
@@ -194,7 +198,7 @@ rank | most lucrative scam (category) | Total Gas Used | Total Ether profited
 3 | Fake ICO | 7402302.0 | 1.35645756688963e+21
 
 
-
+### _Result D2_
 _Part 2:_ **The output of the correlation implies that the Gas value is more when the scam is active or in an offline status. Gas value reduces when the scam is Inactive and is the minimum when the scam is Suspended.**
 
 Scam (category) | Status | Total Gas Used | Total Value
@@ -212,7 +216,7 @@ Scamming | Suspended | 2502740.0 | 3.71016795e+18
 ### _Gas Guzzlers_ 
 For any transaction on Ethereum a user must supply gas. How has gas price changed over time? Have contracts become more complicated, requiring more gas, or less so? Also, could you correlate the complexity for some of the top-10 contracts found in Part-B by observing the change over their transactions (10%)
 
-### _Results:_
+### _Result D Gas Guzzlers 1_
 _Part 1:_ **Gas Price change with time**
 
 <img width="476" alt="image" src="https://user-images.githubusercontent.com/35501313/170025871-e5abd222-6b55-4785-8d4e-b303c35c2b7d.png">
@@ -221,7 +225,7 @@ _Part 1:_ **Gas Price change with time**
 
 * Above Bar plot and Line plots show that the gas-price change is at the peak when started in Aug 2018 and then decreased. However, some sudden rise (peaks) can be observed in the gas price during Nov to Feb months of every year.
 
-
+### _Result D Gas Guzzlers 2 and 3_
 _Part 2:_ **Have contracts become more complicated, requiring more gas, or less so?**
 
 <img width="601" alt="image" src="https://user-images.githubusercontent.com/35501313/170026596-28efb711-9d5a-439f-9722-1e3f8dcf859a.png">
@@ -244,7 +248,7 @@ _Part 3:_ ** could you correlate the complexity for some of the top-10 contracts
 ### _Comparative Evaluation_ 
 Reimplement Part B in Spark (if your original was MRJob, or vice versa). How does it run in comparison? Keep in mind that to get representative results you will have to run the job multiple times, and report median/average results. Can you explain the reason for these results? What framework seems more appropriate for this task? (10%)
 
-### _Results:_
+### _Result D Compare Tech_
 
 * Time taken by Spark and Map Reduce to finish the same task:
 
@@ -256,7 +260,7 @@ Reimplement Part B in Spark (if your original was MRJob, or vice versa). How doe
 ### _Wash Trading:_ 
 Wash trading is defined as "Entering into or purporting to enter into, transactions to give the appearance that purchases and sales have been made, without incurring market risk or changing the trader’s market position" Unregulated exchanges use these to fake up to 70% of their trading volume? Which addresses are involved in wash trading? Which trader has the highest volume of wash trades? How certain are you of your result? More information can be found at https://dl.acm.org/doi/pdf/10.1145/3442381.3449824. One way to measure ether balance over time is also possible but you will need to discuss accuracy concerns. (20%)
 
-### _Results:_
+### _Result D Wash Trades_
 
 Self trade is the most common type of wash trade. Top 10 self-trades are as below:
 
@@ -279,7 +283,7 @@ From Address | To Address | Total Value
 ### _Fork the Chain:_ 
 There have been several forks of Ethereum in the past. Identify one or more of these and see what effect it had on price and general usage. For example, did a price surge/plummet occur, and who profited most from this? (10%)
 
-### _Results:_
+### _Result D Ethereum Forks_
 
 * Constantinople Fork – Date: 28/2/2019
 
