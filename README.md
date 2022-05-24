@@ -277,4 +277,13 @@ There have been several forks of Ethereum in the past. Identify one or more of t
 
 <img width="523" alt="image" src="https://user-images.githubusercontent.com/35501313/170028044-77b3ebd3-ec07-4db7-b831-701204ec0485.png">
 
+In the first example, Constantinople which occurred on 28/2/2019, it can be observed that the avg gas price increased and reached the peak value in 14 days and there is a steep downfall in the average gas price after 28/2/2019.
+
+In the case of Byzantium which occurred on 16/10/2017, it can be observed that there is a continuous decline in the average gas price after the fork for next 3 days.
+
+In case of Spurious Dragon which occurred on 23/11/2016, the gas price decreased drastically and started recovering again after 2 days of the fork.
+
+Finally, In case of Homestead which occurred on 15/3/2016, the gas price slightly decreased but fluctuated for next few days.
+
+Thus, we can conclude that, the forks had a plummet impact on the gas price of the transactions. This means that the top 10 transactions will gain the most profit as the gas price goes down for the transactions, so each transaction will provide the profit in terms of cost.
 
