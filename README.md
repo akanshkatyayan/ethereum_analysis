@@ -3,7 +3,7 @@ Ethereum Data Analysis on contracts, transactions, gas, scams and scammers using
 
 Ethereum is a blockchain-based distributed computing platform where users may exchange currency (Ether), provide or purchase services (smart contracts), mine their own coinage (tokens), as well as other applications. The Ethereum network is fully decentralized, managed by public-key cryptography, peer-to-peer networking, and proof-of-work to process/verify transactions.
 
-* [Total number of transactions]()
+* [Total number of transactions](https://github.com/akanshkatyayan/ethereum_analysis/#part-a.-time-analysis-(20%))
 
 * [Top 10 most popular services](https://github.com/Dorsa-Arezooji/Etherium-Analysis#2-top-10-most-popular-services)
 
@@ -114,7 +114,7 @@ status: If the scam is currently active, inactive or has been taken offline
 },
 ```
 
-## **PART A. TIME ANALYSIS (20%)**
+## PART A. TIME ANALYSIS (20%)
 Create a bar plot showing the number of transactions occurring every month between the start and end of the dataset. Create a bar plot showing the average value of transactions in each month between the start and end of the dataset. Note: As the dataset spans multiple years and you are aggregating together all transactions in the same month, make sure to include the year in your analysis.
 Note: Once the raw results have been processed within Hadoop/Spark you may create your bar plot in any software of your choice (excel, python, R, etc.)
 
