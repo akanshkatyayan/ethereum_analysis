@@ -145,8 +145,8 @@ Evaluate the top 10 miners by the size of the blocks mined. This is simpler as i
 ### _Results:_
 
 **The top 10 most active miners:**
-Miner | Total size
-------------|---------
+Rank | Miner | Total size
+------------|---------------------------------|---------
 1 | "0xea674fdde714fd979de3edf0f56aa9716b898ec8" | 23989401188
 2 | "0x829bd824b016326a401d083b33d092293333a830" | 15010222714
 3 | "0x5a0b54d5dc17e0aadc383d2db43b0a0d3e029c4c" | 13978859941
@@ -189,20 +189,49 @@ Scamming | Offline | 1694248234.0 | 2.2099890651296327e+22
 Scamming | Suspended | 2502740.0 | 3.71016795e+18
 
 
-### _Fork the Chain:_ 
-There have been several forks of Ethereum in the past. Identify one or more of these and see what effect it had on price and general usage. For example, did a price surge/plummet occur, and who profited most from this? (10%)
-
-### _Results:_
-
 ### _Gas Guzzlers_ 
 For any transaction on Ethereum a user must supply gas. How has gas price changed over time? Have contracts become more complicated, requiring more gas, or less so? Also, could you correlate the complexity for some of the top-10 contracts found in Part-B by observing the change over their transactions (10%)
 
 ### _Results:_
+_Part 1:_ **Gas Price change with time**
+
+<img width="476" alt="image" src="https://user-images.githubusercontent.com/35501313/170025871-e5abd222-6b55-4785-8d4e-b303c35c2b7d.png">
+
+<img width="497" alt="image" src="https://user-images.githubusercontent.com/35501313/170025978-61ce5559-e35f-421d-a9ec-1a0d8fb30f9c.png">
+
+* Above Bar plot and Line plots show that the gas-price change is at the peak when started in Aug 2018 and then decreased. However, some sudden rise (peaks) can be observed in the gas price during Nov to Feb months of every year.
+
+
+_Part 2:_ **Have contracts become more complicated, requiring more gas, or less so?**
+
+<img width="601" alt="image" src="https://user-images.githubusercontent.com/35501313/170026596-28efb711-9d5a-439f-9722-1e3f8dcf859a.png">
+
+* Above graphs implies that, the average gas usage increased steadily until the end of 2017 and reached the peak value. From the start of 2018, there were minor changes observed in the similar range.
+* On the other hand, complexity (difficulty value) increased exponentially till the Sep 2017 and suddenly observed a decline in the later 2017 and It started to rise again and reached the peak value in Oct 2018. Post which it gradually declined again and couldn’t reach the optimum value.
+
+_Part 3:_ ** could you correlate the complexity for some of the top-10 contracts found in Part-B by observing the change over their transactions?**
+
+**For Address: “0xaa1a6e3e6ef20068f7f8d8c835d2d22fd5116444” →**
+
+<img width="605" alt="image" src="https://user-images.githubusercontent.com/35501313/170027022-e5e923a4-0160-4cc4-aef7-ae547ade9b5b.png">
+
+**For address: “0xfa52274dd61e1643d2205169732f29114bc240b3”→**
+
+<img width="603" alt="image" src="https://user-images.githubusercontent.com/35501313/170027122-f9e2ff65-9721-492c-a077-6ebc09f544d3.png">
+
+**From the above observations, it can be concluded that the difficulty is correlated with time, and it increases first reaches the peak value in later 2017 and early 2018 and then decreases.**
 
 ### _Comparative Evaluation_ 
 Reimplement Part B in Spark (if your original was MRJob, or vice versa). How does it run in comparison? Keep in mind that to get representative results you will have to run the job multiple times, and report median/average results. Can you explain the reason for these results? What framework seems more appropriate for this task? (10%)
 
 ### _Results:_
+
+* Time taken by Spark and Map Reduce to finish the same task:
+
+<img width="651" alt="image" src="https://user-images.githubusercontent.com/35501313/170027488-7826c38c-e376-43b7-a8d0-979119ae1c63.png">
+
+**For the given dataset, Spark is well suited as compared to MapReduce.**
+
 
 ### _Wash Trading:_ 
 Wash trading is defined as "Entering into or purporting to enter into, transactions to give the appearance that purchases and sales have been made, without incurring market risk or changing the trader’s market position" Unregulated exchanges use these to fake up to 70% of their trading volume? Which addresses are involved in wash trading? Which trader has the highest volume of wash trades? How certain are you of your result? More information can be found at https://dl.acm.org/doi/pdf/10.1145/3442381.3449824. One way to measure ether balance over time is also possible but you will need to discuss accuracy concerns. (20%)
@@ -225,4 +254,27 @@ From Address | To Address | Total Value
 0x005864ea59b094db9ed88c05ffba3d3a3410592b | 0x005864ea59b094db9ed88c05ffba3d3a3410592b |  3.7199e+22
 
 **Highest volume self-trade wash-trader is with address - 0x02459d2ea9a008342d8685dae79d213f14a87d43**
+
+
+### _Fork the Chain:_ 
+There have been several forks of Ethereum in the past. Identify one or more of these and see what effect it had on price and general usage. For example, did a price surge/plummet occur, and who profited most from this? (10%)
+
+### _Results:_
+
+* Constantinople Fork – Date: 28/2/2019
+
+<img width="519" alt="image" src="https://user-images.githubusercontent.com/35501313/170027728-9116b7eb-f8bb-489a-8ff4-a8d1ca7223d3.png">
+
+* Byzantium Fork – Date: 16/10/2017
+
+<img width="518" alt="image" src="https://user-images.githubusercontent.com/35501313/170027842-3cb76209-e174-4769-8747-b2e74230a01e.png">
+
+* Spurious Dragon – Date: 23/11/2016
+
+<img width="530" alt="image" src="https://user-images.githubusercontent.com/35501313/170027966-e66bcdf8-429a-4d2a-8a94-4a81e9153eef.png">
+
+* Homestead – Date: 15/3/2016
+
+<img width="523" alt="image" src="https://user-images.githubusercontent.com/35501313/170028044-77b3ebd3-ec07-4db7-b831-701204ec0485.png">
+
 
