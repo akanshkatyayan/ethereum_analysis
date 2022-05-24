@@ -1,8 +1,28 @@
 # **Ethereum Analysis**
-Ethereum Data Analysis using Big Data technologies - MapReduce and Spark
+Ethereum Data Analysis on contracts, transactions, gas, scams and scammers using Big Data technologies - MapReduce and Spark
+
 Ethereum is a blockchain-based distributed computing platform where users may exchange currency (Ether), provide or purchase services (smart contracts), mine their own coinage (tokens), as well as other applications. The Ethereum network is fully decentralized, managed by public-key cryptography, peer-to-peer networking, and proof-of-work to process/verify transactions.
 
-## **Dataset **
+* [Total number of transactions]()
+
+* [Top 10 most popular services](https://github.com/Dorsa-Arezooji/Etherium-Analysis#2-top-10-most-popular-services)
+
+* [Most lucrative forms of scam](https://github.com/Dorsa-Arezooji/Etherium-Analysis#31-most-lucritive-forms-of-scams)
+
+* [How different scams changed with time](https://github.com/Dorsa-Arezooji/Etherium-Analysis#32-how-different-scams-changed-with-time)
+
+* [Transactions gas price vs time](https://github.com/Dorsa-Arezooji/Etherium-Analysis#41-transactions-gas-price-vs-time)
+
+* [Contract gas vs time](https://github.com/Dorsa-Arezooji/Etherium-Analysis#42-contract-gas-vs-time)
+
+* [Contract complexity vs time](https://github.com/Dorsa-Arezooji/Etherium-Analysis#43-contract-complexity-vs-time)
+
+* [Triangle count](https://github.com/Dorsa-Arezooji/Etherium-Analysis#51-triangle-count)
+
+* [Scammer wallets used for accumulating Ether](https://github.com/Dorsa-Arezooji/Etherium-Analysis#52-scammer-wallets)
+
+
+## **Dataset**
 A subset of the data available on BigQuery is provided at the HDFS folder /data/ethereum. The blocks, contracts, and transactions tables have been pulled down and been stripped of unneeded fields to reduce their size. Please find them attached as csv files. We have also downloaded a set of scams, both active and inactive, run on the Ethereum network via etherscamDB which is available on HDFS at /data/ethereum/scams.json.
 
 
