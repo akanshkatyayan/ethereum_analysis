@@ -1,13 +1,12 @@
-# ethereum_analysis
+# **Ethereum Analysis**
 Ethereum Data Analysis using Big Data technologies - MapReduce and Spark
 Ethereum is a blockchain-based distributed computing platform where users may exchange currency (Ether), provide or purchase services (smart contracts), mine their own coinage (tokens), as well as other applications. The Ethereum network is fully decentralized, managed by public-key cryptography, peer-to-peer networking, and proof-of-work to process/verify transactions.
 
-Whilst you would normally need a CLI tool such as GETH to access the Ethereum blockchain, recent tools allow scraping all block/transactions and dump these to csv's to be processed in bulk; notably Ethereum-ETL. These dumps are uploaded daily into a repository on Google BigQuery. We have used this source as the dataset for this coursework.
-
+## **Dataset **
 A subset of the data available on BigQuery is provided at the HDFS folder /data/ethereum. The blocks, contracts, and transactions tables have been pulled down and been stripped of unneeded fields to reduce their size. Please find them attached as csv files. We have also downloaded a set of scams, both active and inactive, run on the Ethereum network via etherscamDB which is available on HDFS at /data/ethereum/scams.json.
 
 
-**DATASET SCHEMA - BLOCKS**
+### **DATASET SCHEMA - BLOCKS**
 number: The block number
 hash: Hash of the block
 miner: The address of the beneficiary to whom the mining rewards were given
@@ -17,15 +16,16 @@ gas_limit: The maximum gas allowed in this block
 gas_used: The total used gas by all transactions in this block
 timestamp: The timestamp for when the block was collated
 transaction_count: The number of transactions in the block
-
--------+--------------------+--------------------+----------------+-----+---------+--------+----------+-----------------+
+```
++-------+--------------------+--------------------+----------------+-----+---------+--------+----------+-----------------+
 | number|                hash|               miner|      difficulty| size|gas_limit|gas_used| timestamp|transaction_count|
 +-------+--------------------+--------------------+----------------+-----+---------+--------+----------+-----------------+
 |4776199|0x9172600443ac88e...|0x5a0b54d5dc17e0a...|1765656009004680| 9773|  7995996| 2042230|1513937536|               62|
 |4776200|0x1fb1d4a2f5d2a61...|0xea674fdde714fd9...|1765656009037448|15532|  8000029| 4385719|1513937547|              101|
 |4776201|0xe633b6dca01d085...|0x829bd824b016326...|1765656009070216|14033|  8000000| 7992282|1513937564|               99|
+```
+### **DATASET SCHEMA - TRANSACTIONS**
 
-**DATASET SCHEMA - TRANSACTIONS**
 block_number: Block number where this transaction was in
 from_address: Address of the sender
 to_address: Address of the receiver. null when it is a contract creation transaction
@@ -33,29 +33,31 @@ value: Value transferred in Wei (the smallest denomination of ether)
 gas: Gas provided by the sender
 gas_price : Gas price provided by the sender in Wei
 block_timestamp: Timestamp the associated block was registered at (effectively timestamp of the transaction)
-
+```
 +------------+--------------------+--------------------+-------------------+------+-----------+---------------+
 |block_number|        from_address|          to_address|              value|   gas|  gas_price|block_timestamp|
 +------------+--------------------+--------------------+-------------------+------+-----------+---------------+
 |     6638809|0x0b6081d38878616...|0x412270b1f0f3884...| 240648550000000000| 21000| 5000000000|     1541290680|
 |     6638809|0xb43febf2e6c49f3...|0x9eec65e5b998db6...|                  0| 60000| 5000000000|     1541290680|
 |     6638809|0x564860b05cab055...|0x73850f079ceaba2...|                  0|200200| 5000000000|     1541290680|
+```
 
+### **DATASET SCHEMA - CONTRACTS**
 
-**DATASET SCHEMA - CONTRACTS**
 address: Address of the contract
 is_erc20: Whether this contract is an ERC20 contract
 is_erc721: Whether this contract is an ERC721 contract
 block_number: Block number where this contract was created
-
+```
 +--------------------+--------+---------+------------+--------------------+
 |             address|is_erc20|is_erc721|block_number|     block_timestamp|
 +--------------------+--------+---------+------------+--------------------+
 |0x9a78bba29a2633b...|   false|    false|     8623545|2019-09-26 08:50:...|
 |0x85aa7fbc06e3f95...|   false|    false|     8621323|2019-09-26 00:29:...|
 |0xc3649f1e59705f2...|   false|    false|     8621325|2019-09-26 00:29:...|
+```
 
-**DATASET SCHEMA - SCAMS.JSON**
+### **DATASET SCHEMA - SCAMS.JSON**
 id: Unique ID for the reported scam
 name: Name of the Scam
 url: Hosting URL
@@ -68,7 +70,7 @@ reporter: User/company who reported the scam first
 ip: IP address of the reporter
 status: If the scam is currently active, inactive or has been taken offline
 
-
+```
 0x11c058c3efbf53939fb6872b09a2b5cf2410a1e2c3f3c867664e43a626d878c0: {
     id: 81,
     name: "myetherwallet.us",
@@ -90,22 +92,23 @@ status: If the scam is currently active, inactive or has been taken offline
     ],
     status: "Offline"
 },
+```
 
-**PART A. TIME ANALYSIS (20%)**
+## **PART A. TIME ANALYSIS (20%)**
 Create a bar plot showing the number of transactions occurring every month between the start and end of the dataset. Create a bar plot showing the average value of transactions in each month between the start and end of the dataset. Note: As the dataset spans multiple years and you are aggregating together all transactions in the same month, make sure to include the year in your analysis.
 Note: Once the raw results have been processed within Hadoop/Spark you may create your bar plot in any software of your choice (excel, python, R, etc.)
 
-_Results:_
-The total number of transactions are aggregated for each month included in the dataset.
+### _Results:_
+**The total number of transactions are aggregated for each month included in the dataset.**
 
 <img width="595" alt="image" src="https://user-images.githubusercontent.com/35501313/170018630-13b12750-5a21-4ba2-a27a-64f4d9e0cb14.png">
 
 
-The average value of transactions in each month between the start and end of the dataset.
+**The average value of transactions in each month between the start and end of the dataset.**
 
 <img width="583" alt="image" src="https://user-images.githubusercontent.com/35501313/170018816-f7d626fa-affb-4485-b499-4865b46c6d32.png">
 
-**PART B. TOP TEN MOST POPULAR SERVICES (25%)**
+## **PART B. TOP TEN MOST POPULAR SERVICES (25%)**
 Evaluate the top 10 smart contracts by total Ether received. An outline of the subtasks required to extract this information is provided below, focusing on a MRJob based approach. This is, however, is not the only way to complete the task, as there are several other viable ways of completing this assignment.
 
 _JOB 1 - INITIAL AGGREGATION_
@@ -119,7 +122,7 @@ Secondly, in the reducer, if the address for a given aggregate from Job 1 was no
 _JOB 3 - TOP TEN_
 Finally, the third job will take as input the now filtered address aggregates and sort these via a top ten reducer, utilizing what you have learned from lab 4.
 
-_Results:_
+### _Results:_
 the top 10 services with the highest amounts of Ethereum received for smart contracts are yielded.
 
 rank | address | total Ether received
@@ -136,12 +139,12 @@ rank | address | total Ether received
 10 | 0x341e790174e3a4d35b65fdc067b6b5634a61caea | 8.37900075192e+24
 
 
-**PART C. TOP TEN MOST ACTIVE MINERS (15%)**
+## **PART C. TOP TEN MOST ACTIVE MINERS (15%)**
 Evaluate the top 10 miners by the size of the blocks mined. This is simpler as it does not require a join. You will first have to aggregate blocks to see how much each miner has been involved in. You will want to aggregate size for addresses in the miner field. This will be similar to the wordcount that we saw in Lab 1 and Lab 2. You can add each value from the reducer to a list and then sort the list to obtain the most active miners.
 
-_Results:_
+### _Results:_
 
-The top 10 most active miners:
+**The top 10 most active miners:**
 Miner | Total size
 ------------|---------
 1 | "0xea674fdde714fd979de3edf0f56aa9716b898ec8" | 23989401188
@@ -156,11 +159,12 @@ Miner | Total size
 10 | "0x61c808d82a3ac53231750dadc13c777b59310bd9" | 692942577
 
 
-**PART D. DATA EXPLORATION (40+%)**
+## **PART D. DATA EXPLORATION (40+%)**
 
-_Popular Scams:_ Utilising the provided scam dataset, what is the most lucrative form of scam? Does this correlate with certainly known scams going offline/inactive? For the correlation, you could produce the count of how many scams for each category are active/inactive/offline/online/etc and try to correlate it with volume (value) to make conclusions on whether state plays a factor in making some scams more lucrative. Therefore, getting the volume and state of each scam, you can make a conclusion whether the most lucrative ones are ones that are online or offline or active or inactive. So for that purpose, you need to just produce a table with SCAM TYPE, STATE, VOLUME which would be enough (15%).
+### _Popular Scams:_ 
+Utilising the provided scam dataset, what is the most lucrative form of scam? Does this correlate with certainly known scams going offline/inactive? For the correlation, you could produce the count of how many scams for each category are active/inactive/offline/online/etc and try to correlate it with volume (value) to make conclusions on whether state plays a factor in making some scams more lucrative. Therefore, getting the volume and state of each scam, you can make a conclusion whether the most lucrative ones are ones that are online or offline or active or inactive. So for that purpose, you need to just produce a table with SCAM TYPE, STATE, VOLUME which would be enough (15%).
 
-_Results:_
+### _Results:_
 
 _Part 1:_ **Scamming is the most lucrative type of scam**
 rank | most lucrative scam (category) | Total Gas Used | Total Ether profited
@@ -185,18 +189,27 @@ Scamming | Offline | 1694248234.0 | 2.2099890651296327e+22
 Scamming | Suspended | 2502740.0 | 3.71016795e+18
 
 
-_Fork the Chain:_ There have been several forks of Ethereum in the past. Identify one or more of these and see what effect it had on price and general usage. For example, did a price surge/plummet occur, and who profited most from this? (10%)
+### _Fork the Chain:_ 
+There have been several forks of Ethereum in the past. Identify one or more of these and see what effect it had on price and general usage. For example, did a price surge/plummet occur, and who profited most from this? (10%)
 
-_Gas Guzzlers:_ For any transaction on Ethereum a user must supply gas. How has gas price changed over time? Have contracts become more complicated, requiring more gas, or less so? Also, could you correlate the complexity for some of the top-10 contracts found in Part-B by observing the change over their transactions (10%)
+### _Results:_
 
-_Comparative Evaluation_ Reimplement Part B in Spark (if your original was MRJob, or vice versa). How does it run in comparison? Keep in mind that to get representative results you will have to run the job multiple times, and report median/average results. Can you explain the reason for these results? What framework seems more appropriate for this task? (10%)
+### _Gas Guzzlers_ 
+For any transaction on Ethereum a user must supply gas. How has gas price changed over time? Have contracts become more complicated, requiring more gas, or less so? Also, could you correlate the complexity for some of the top-10 contracts found in Part-B by observing the change over their transactions (10%)
 
+### _Results:_
 
-_Wash Trading:_ Wash trading is defined as "Entering into or purporting to enter into, transactions to give the appearance that purchases and sales have been made, without incurring market risk or changing the trader’s market position" Unregulated exchanges use these to fake up to 70% of their trading volume? Which addresses are involved in wash trading? Which trader has the highest volume of wash trades? How certain are you of your result? More information can be found at https://dl.acm.org/doi/pdf/10.1145/3442381.3449824. One way to measure ether balance over time is also possible but you will need to discuss accuracy concerns. (20%)
+### _Comparative Evaluation_ 
+Reimplement Part B in Spark (if your original was MRJob, or vice versa). How does it run in comparison? Keep in mind that to get representative results you will have to run the job multiple times, and report median/average results. Can you explain the reason for these results? What framework seems more appropriate for this task? (10%)
 
-_Results:_
+### _Results:_
 
-Self trades is the most common type of wash trade. Top 10 self-trades are as below:
+### _Wash Trading:_ 
+Wash trading is defined as "Entering into or purporting to enter into, transactions to give the appearance that purchases and sales have been made, without incurring market risk or changing the trader’s market position" Unregulated exchanges use these to fake up to 70% of their trading volume? Which addresses are involved in wash trading? Which trader has the highest volume of wash trades? How certain are you of your result? More information can be found at https://dl.acm.org/doi/pdf/10.1145/3442381.3449824. One way to measure ether balance over time is also possible but you will need to discuss accuracy concerns. (20%)
+
+### _Results:_
+
+Self trade is the most common type of wash trade. Top 10 self-trades are as below:
 
 From Address | To Address | Total Value
 --------------------------------|--------------------------------|--------------
